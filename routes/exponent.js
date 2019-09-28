@@ -11,25 +11,11 @@ router.post("/", function(req, res, next) {
 });
 
 function solution(n, p) {
-	if (n === 0 && p === 0) {
-		return {
-			result: [null, null, null]
-		};
-	} else if (n === 0) {
-		return {
-			result: [0, 1, 0]
-		};
-	} else if (p === 0) {
-		return {
-			result: [1, 1, 1]
-		};
-	}
-
 	var pLogN = p * Math.log10(n);
 	console.log("pLogN: " + pLogN);
 
 	// FIX HERE
-	var a = Math.pow(10, pLogN - Math.floor(pLogN)); // Math.pow(10, pLogN);
+	var a = Math.pow(10, pLogN - Math.floor(pLogN));
 	console.log("a: " + a);
 	var first = firstDigit(a);
 	console.log("first: " + first);
@@ -104,6 +90,20 @@ function solution(n, p) {
 	var l = Math.ceil(pLogN);
 
 	console.log("length: " + l);
+
+	if (n === 0 && p === 0) {
+		return {
+			result: [null, null, null]
+		};
+	} else if (n === 0) {
+		return {
+			result: [0, 1, 0]
+		};
+	} else if (p === 0) {
+		return {
+			result: [1, 1, 1]
+		};
+	}
 
 	return {
 		result: [first, l, last]
