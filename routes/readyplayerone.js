@@ -39,12 +39,18 @@ router.post("/", function(req, res, next) {
 			res: 3
 		};
 	} else {
-		output = {
-			res: 3
-		};
 	}
 
 	res.send(JSON.stringify(output));
 });
+
+function sol(max, arr, isPlayer1) {
+	for (let i = 0; i < arr.length; i++) {
+		if (arr[i]) {
+			arr[i] = false;
+			1 + sol(max - (i + 1), arr);
+		}
+	}
+}
 
 module.exports = router;

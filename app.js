@@ -13,6 +13,8 @@ var readyplayeroneRouter = require("./routes/readyplayerone");
 var sentimentRouter = require("./routes/sentiment");
 var depManRouter = require("./routes/depMan");
 var typingRouter = require("./routes/typing");
+var compositionRouter = require("./routes/composition");
+var exponentRouter = require("./routes/exponent");
 
 var app = express();
 
@@ -37,6 +39,8 @@ app.use("/readyplayerone", readyplayeroneRouter);
 app.use("/sentiment-analysis", sentimentRouter);
 app.use("/generateSequence", depManRouter);
 app.use("/typing-contest", typingRouter);
+app.use("/composition", compositionRouter);
+app.use("/exponent", exponentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
