@@ -1,8 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-router.get("/", function(req, res, next) {
-	res.send("Wedding Nightmare");
+router.post("/", (req, res, next) => {
 	console.log(req.body);
 });
 
