@@ -91,7 +91,7 @@ router.post("/", function(req, res, next) {
 		result: [first, l, last]
 	};
 
-	res.send(JSON.stringify(output));
+	res.send(output);
 });
 
 function simpleLast(x) {
