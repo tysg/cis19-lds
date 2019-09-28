@@ -17,7 +17,8 @@ class Optimizer:
         self.problem = LpProblem("op", LpMaximize)
 
     def op1a(self):
-        self.variables = LpVariable.dicts("stock", self.names, 0, 1, LpInteger)
+        self.variables = LpVariable.dicts(
+            "stock", self.names, lowBound=0, upBound=1, cat=LpInteger)
         self.problem += lpSum([
             self.stocks[i][1] * self.variables[self.names[i]]
             for i in range(len(self.names))
@@ -50,6 +51,7 @@ class Optimizer:
         self.variables = LpVariable.dicts("stock",
                                           self.names,
                                           lowBound=0,
+                                          upBound=None,
                                           cat=LpInteger)
         self.problem += lpSum([
             self.stocks[i][1] * self.variables[self.names[i]]
@@ -65,6 +67,7 @@ class Optimizer:
     def op2(self):
         self.variables = LpVariable.dicts("stock",
                                           self.names,
+                                          lowBound=0,
                                           upBound=1,
                                           cat=LpInteger)
         self.problem += lpSum([
@@ -87,7 +90,7 @@ class Optimizer:
     def solve(self):
         self.problem.solve()
         if self.problem.status != LpStatusOptimal:
-            return {"profit": 0, "portfolio": []}
+            return json.dumps({"profit": 0, "portfolio": []})
 
         port = []
         for v in self.problem.variables():
