@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
+<<<<<<< HEAD
 function findQueen(arr) {
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr.length; j++) {
@@ -102,4 +103,10 @@ router.post("/", (req, res, next) => {
   res.send(JSON.stringify(ans));
 });
 
+=======
+router.post("/", (req, res, next) => {
+	console.log(req.body);
+});
+
+>>>>>>> d4da692ba0a114757658536be78a8401f9105976
 module.exports = router;
