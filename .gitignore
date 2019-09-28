@@ -12,3 +12,6 @@ typing.in
 
 # ngrok to expose local port
 ngrok
+
+.DS_Store 
+ .vscode/ 
