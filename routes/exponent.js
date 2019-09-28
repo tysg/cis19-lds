@@ -88,8 +88,22 @@ router.post("/", function(req, res, next) {
 	console.log("length: " + l);
 
 	output = {
-		result = [first, l, last]
+		result: [first, l, last]
 	};
+
+	if (n === 0 && p === 0) {
+		output = {
+			result: [null, null, null]
+		};
+	} else if (n === 0) {
+		output = {
+			result: [0, 1, 0]
+		};
+	} else if (p === 0) {
+		output = {
+			result: [1, 1, 1]
+		};
+	}
 
 	res.send(output);
 });
