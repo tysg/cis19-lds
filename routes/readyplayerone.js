@@ -40,7 +40,7 @@ router.post("/", function(req, res, next) {
 		};
 	} else {
 		output = {
-			res: 3
+			res: -1
 		};
 	}
 
