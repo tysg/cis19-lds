@@ -11,7 +11,7 @@ router.post("/", function(req, res, next) {
 	console.log("pLogN: " + pLogN);
 
 	// FIX HERE
-	var a = Math.pow(10, pLogN);
+	var a = Math.pow(10, pLogN - Math.floor(pLogN)); // Math.pow(10, pLogN);
 	console.log("a: " + a);
 	var first = firstDigit(a);
 	console.log("first: " + first);
