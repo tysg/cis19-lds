@@ -6,17 +6,6 @@ router.post("/", function(req, res, next) {
   const result = solution(req.body["modules"], req.body["dependencyPairs"]);
   res.send(result);
 });
-// const sample = {
-//   modules: ["m1", "m2", "m3", "m4", "m5", "m10", "m11", "m12", "m13"],
-//   dependencyPairs: [
-//     { dependee: "m4", dependentOn: "m1" },
-//     { dependee: "m2", dependentOn: "m1" },
-//     { dependee: "m3", dependentOn: "m5" },
-//     { dependee: "m5", dependentOn: "m2" },
-//     { dependee: "m13", dependentOn: "m12" },
-//     { dependee: "m12", dependentOn: "m13" }
-//   ]
-// };
 
 function solution(modules, pairs) {
   var graph = [];

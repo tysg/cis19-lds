@@ -9,3 +9,7 @@ yarn.lock
 chessgame.in
 sentiments.in
 typing.in
+
+
+.DS_Store 
+ .vscode/ 

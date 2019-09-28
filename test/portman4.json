@@ -1,0 +1,10 @@
+{
+  "startingCapital": 400,
+  "risk": 10,
+  "stocks": [
+    ["Sony", 30, 400, 5],
+    ["Dell", 25, 300, 2],
+    ["Disney", 15, 50, 4],
+    ["Apple", 20, 100, 6]
+  ]
+}
