@@ -9,7 +9,7 @@ nltk.download("punkt")
 
 def analyse(paragraphs):
     result = list(map(lambda x: analyse_paragraph(x), paragraphs))
-    return list(map(lambda x: "positive" if x > 0.5 else "negative", result))
+    return list(map(lambda x: "positive" if x > 0 else "negative", result))
 
 
 def analyse_paragraph(paragraph):
