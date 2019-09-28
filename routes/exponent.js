@@ -5,12 +5,7 @@ router.post("/", function(req, res, next) {
 	var input = req.body;
 	const n = input["n"];
 	const p = input["p"];
-	var output = solution(n, p);
 
-	res.send(output);
-});
-
-function solution(n, p) {
 	var pLogN = p * Math.log10(n);
 	console.log("pLogN: " + pLogN);
 
@@ -91,24 +86,28 @@ function solution(n, p) {
 
 	console.log("length: " + l);
 
+	var output = {};
+
 	if (n === 0 && p === 0) {
-		return {
+		output = {
 			result: [null, null, null]
 		};
 	} else if (n === 0) {
-		return {
+		output = {
 			result: [0, 1, 0]
 		};
 	} else if (p === 0) {
-		return {
+		output = {
 			result: [1, 1, 1]
 		};
 	}
 
-	return {
+	output = {
 		result: [first, l, last]
 	};
-}
+
+	res.send(output);
+});
 
 function simpleLast(x) {
 	return x % 10;
