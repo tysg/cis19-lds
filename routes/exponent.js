@@ -15,6 +15,10 @@ router.post("/", function(req, res, next) {
 	var first = Math.floor(a);
 	console.log("first: " + first);
 
+	var l = Math.floor(pLogN + 1);
+
+	console.log("length: " + l);
+
 	var last = 0;
 
 	var nLast = simpleLast(n);
@@ -81,10 +85,6 @@ router.post("/", function(req, res, next) {
 	}
 
 	console.log("last: " + last);
-
-	var l = Math.ceil(pLogN);
-
-	console.log("length: " + l);
 
 	var output = {};
 
