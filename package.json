@@ -16,10 +16,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
     "natural": "^0.6.3",
-<<<<<<< HEAD
-    "nodemon": "^1.19.2"
-=======
+    "nodemon": "^1.19.2",
     "python-shell": "^1.0.8"
->>>>>>> d9ac3cbe6ca58824e31d3a29ff6d51cb020b7ae1
   }
 }
