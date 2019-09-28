@@ -3,50 +3,103 @@ var router = express.Router();
 
 var natural = require("natural");
 
+var Heap = require("collections/heap");
+
 function generateGraph(inputs) {
-  let graph = { start: [] };
+  let graph = {};
 
   inputs.forEach(str => {
     const adjs = inputs
       .filter(neighbour => neighbour !== str)
       .map(neighbour => {
         const hd = natural.HammingDistance(str, neighbour);
-        const weight = hd + 1 < str.length ? hd : str.length;
+        const weight = hd + 1;
         return {
-          node: neighbour,
-          weight: weight,
-          hamming: hd === weight
+          u: str,
+          v: neighbour,
+          weight: weight
         };
       });
     graph[str] = adjs;
   });
 
-  graph.start = inputs.map(el => {
-    return { node: el, weight: el.length, hamming: false };
+  return graph;
+}
+
+function minSpanTree(graph, start) {
+  const visited = new Set();
+  let edges = new Heap([], Object.equals, (a, b) => b.weight - a.weight);
+  let mst = {};
+  Object.keys(graph).forEach(key => (mst[key] = []));
+  let cost = 0;
+
+  visited.add(start);
+  graph[start].forEach(neighbour => {
+    edges.push(neighbour);
   });
 
-  return graph;
+  while (edges.length > 0) {
+    const e = edges.pop();
+    const u = e.u;
+    const v = e.v;
+    const weight = e.weight;
+
+    if (!visited.has(v)) {
+      mst[u].push({ u, v, weight });
+      mst[v].push({ v, u, weight });
+      cost += weight;
+      visited.add(v);
+
+      graph[v].forEach(edge => {
+        if (!visited.has(edge.v)) {
+          edges.push(edge);
+        }
+      });
+    }
+  }
+
+  return { mst, cost };
 }
 
-function minSpanTree(graph) {
-  const { start } = graph;
-  return graph;
-}
+function traceMst(graph, start) {
+  let path = [];
+  let visited = new Set();
+  let stack = [];
 
-function traceMst(graph) {
-  return [];
+  path.push({ type: "INPUT", value: start });
+  visited.add(start);
+  stack.push(...graph[start]);
+
+  while (stack.length > 0) {
+    const edge = stack.pop();
+    const v = edge.v;
+
+    if (!visited.has(v)) {
+      stack.push(...graph[v]);
+      visited.add(v);
+      path.push(
+        { type: "COPY", value: edge.u },
+        { type: "TRANSFORM", value: v }
+      );
+    }
+  }
+  return path;
 }
 
 router.post("/", function(req, res, next) {
   const inputs = req.body;
+  const start = inputs[0];
 
   const graph = generateGraph(inputs);
 
-  const mst = minSpanTree(graph);
+  const mst = minSpanTree(graph, start);
 
-  const path = traceMst(mst);
+  const path = traceMst(mst.mst, start);
 
-  res.send(JSON.stringify(path));
+  const result = { path, cost: mst.cost + start.length };
+  console.log(result);
+
+  res.send(JSON.stringify(result));
 });
 
 module.exports = router;
