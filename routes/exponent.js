@@ -1,4 +1,5 @@
 var express = require("express");
+var { PythonShell } = require("python-shell");
 var router = express.Router();
 
 router.post("/", function(req, res, next) {
@@ -21,68 +22,81 @@ router.post("/", function(req, res, next) {
 
 	var last = 0;
 
-	var nLast = simpleLast(n);
-	if (nLast === 0 || nLast === 1 || nLast === 5 || nLast === 6) {
-		last = nLast;
-	} else if (nLast === 2 || nLast === 3 || nLast === 7 || nLast === 8) {
-		var cycle = p % 4;
-		if (nLast === 2) {
-			if (cycle === 0) {
-				last = 6;
-			} else if (cycle === 1) {
-				last = 2;
-			} else if (cycle === 2) {
-				last = 4;
-			} else {
-				last = 8;
-			}
-		} else if (nLast === 3) {
-			if (cycle === 0) {
-				last = 1;
-			} else if (cycle === 1) {
-				last = 3;
-			} else if (cycle === 2) {
-				last = 9;
-			} else {
-				last = 7;
-			}
-		} else if (nLast === 7) {
-			if (cycle === 0) {
-				last = 1;
-			} else if (cycle === 1) {
-				last = 7;
-			} else if (cycle === 2) {
-				last = 9;
-			} else {
-				last = 3;
-			}
-		} else if (nLast === 8) {
-			if (cycle === 0) {
-				last = 6;
-			} else if (cycle === 1) {
-				last = 8;
-			} else if (cycle === 2) {
-				last = 4;
-			} else {
-				last = 2;
-			}
-		}
-	} else if (nLast === 4 || nLast === 9) {
-		var cycle = p % 2 === 0;
-		if (nLast === 4) {
-			if (cycle) {
-				last = 6;
-			} else {
-				last = 4;
-			}
-		} else {
-			if (cycle) {
-				last = 1;
-			} else {
-				last = 9;
-			}
-		}
-	}
+	let options = {
+		pythonOptions: ["-u"],
+		args: [n, p]
+	};
+	last = PythonShell.run("./routes/exponent/expLastDig.py", options, function(
+		err,
+		results
+	) {
+		if (err) throw err;
+		console.log("results: " + results);
+		return results;
+	});
+
+	// var nLast = simpleLast(n);
+	// if (nLast === 0 || nLast === 1 || nLast === 5 || nLast === 6) {
+	// 	last = nLast;
+	// } else if (nLast === 2 || nLast === 3 || nLast === 7 || nLast === 8) {
+	// 	var cycle = p % 4;
+	// 	if (nLast === 2) {
+	// 		if (cycle === 0) {
+	// 			last = 6;
+	// 		} else if (cycle === 1) {
+	// 			last = 2;
+	// 		} else if (cycle === 2) {
+	// 			last = 4;
+	// 		} else {
+	// 			last = 8;
+	// 		}
+	// 	} else if (nLast === 3) {
+	// 		if (cycle === 0) {
+	// 			last = 1;
+	// 		} else if (cycle === 1) {
+	// 			last = 3;
+	// 		} else if (cycle === 2) {
+	// 			last = 9;
+	// 		} else {
+	// 			last = 7;
+	// 		}
+	// 	} else if (nLast === 7) {
+	// 		if (cycle === 0) {
+	// 			last = 1;
+	// 		} else if (cycle === 1) {
+	// 			last = 7;
+	// 		} else if (cycle === 2) {
+	// 			last = 9;
+	// 		} else {
+	// 			last = 3;
+	// 		}
+	// 	} else if (nLast === 8) {
+	// 		if (cycle === 0) {
+	// 			last = 6;
+	// 		} else if (cycle === 1) {
+	// 			last = 8;
+	// 		} else if (cycle === 2) {
+	// 			last = 4;
+	// 		} else {
+	// 			last = 2;
+	// 		}
+	// 	}
+	// } else if (nLast === 4 || nLast === 9) {
+	// 	var cycle = p % 2 === 0;
+	// 	if (nLast === 4) {
+	// 		if (cycle) {
+	// 			last = 6;
+	// 		} else {
+	// 			last = 4;
+	// 		}
+	// 	} else {
+	// 		if (cycle) {
+	// 			last = 1;
+	// 		} else {
+	// 			last = 9;
+	// 		}
+	// 	}
+	// }
 
 	console.log("last: " + last);
 
