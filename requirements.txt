@@ -2,6 +2,7 @@ autopep8==1.4.4
 certifi==2019.9.11
 chardet==3.0.4
 idna==2.8
+nltk==3.4.5
 PuLP==1.6.10
 pycodestyle==2.5.0
 pyparsing==2.4.2
