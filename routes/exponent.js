@@ -6,13 +6,13 @@ router.post("/", function(req, res, next) {
 	const n = input["n"];
 	const p = input["p"];
 
-	var pLogN = p * getBaseLogTen(n);
+	var pLogN = p * Math.log10(n);
 	console.log("pLogN: " + pLogN);
 
 	// FIX HERE
-	var a = Math.pow(10, pLogN - Math.floor(pLogN));
+	var a = Math.pow(10, pLogN % 1);
 	console.log("a: " + a);
-	var first = firstDigit(a);
+	var first = Math.floor(a);
 	console.log("first: " + first);
 
 	var last = 0;
