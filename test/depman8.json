@@ -1,0 +1,13 @@
+{
+  "modules": [],
+  "dependencyPairs": [
+    { "dependee": "1", "dependentOn": "2" },
+    { "dependee": "2", "dependentOn": "3" },
+    { "dependee": "3", "dependentOn": "4" },
+    { "dependee": "4", "dependentOn": "5" },
+    { "dependee": "5", "dependentOn": "6" },
+    { "dependee": "6", "dependentOn": "7" },
+    { "dependee": "23", "dependentOn": "24" },
+    { "dependee": "24", "dependentOn": "24" }
+  ]
+}

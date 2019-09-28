@@ -97,7 +97,7 @@ router.post("/", (req, res, next) => {
   const y = temp[1];
   let ans = 0;
 
-  ans += traverseOrthogonal(x, y, map);
+  ans = traverseOrthogonal(x, y, map);
 
   res.send(JSON.stringify(ans));
 });

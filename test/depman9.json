@@ -1,0 +1,8 @@
+{
+  "modules": ["cs"],
+  "dependencyPairs": [
+    { "dependee": "1", "dependentOn": "2" },
+    { "dependee": "2", "dependentOn": "3" },
+    { "dependee": "3", "dependentOn": "4" }
+  ]
+}
