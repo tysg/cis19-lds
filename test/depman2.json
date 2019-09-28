@@ -1,0 +1,8 @@
+{
+  "modules": ["m1", "m27", "m18", "m31"],
+  "dependencyPairs": [
+    { "dependee": "m1", "dependentOn": "m27" },
+    { "dependee": "m27", "dependentOn": "m18" },
+    { "dependee": "m18", "dependentOn": "m1" }
+  ]
+}
