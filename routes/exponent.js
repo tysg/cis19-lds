@@ -8,9 +8,13 @@ router.post("/", function(req, res, next) {
 	var output = {};
 
 	var pLogN = p * getBaseLogTen(n);
+	console.log("pLogN: " + pLogN);
 
+	// FIX HERE
 	var a = Math.pow(10, pLogN);
+	console.log("a: " + a);
 	var first = firstDigit(a);
+	console.log("first: " + first);
 
 	var last = 0;
 
@@ -61,14 +65,15 @@ router.post("/", function(req, res, next) {
 			}
 		}
 	} else if (nLast === 4 || nLast === 9) {
+		var cycle = p % 2 === 0;
 		if (nLast === 4) {
-			if (p % 2 === 0) {
+			if (cycle) {
 				last = 6;
 			} else {
 				last = 4;
 			}
 		} else {
-			if (p % 2 === 0) {
+			if (cycle) {
 				last = 1;
 			} else {
 				last = 9;
@@ -76,7 +81,11 @@ router.post("/", function(req, res, next) {
 		}
 	}
 
+	console.log("last: " + last);
+
 	var l = Math.floor(pLogN) + 1;
+
+	console.log("length: " + l);
 
 	output = {
 		result: [first, l, last]
@@ -85,46 +94,6 @@ router.post("/", function(req, res, next) {
 	res.send(JSON.stringify(output));
 });
 
-// Function to find b % a
-function Modulo(a, b) {
-	// Initialize result
-	var mod = 0;
-
-	// calculating mod of b with a to make
-	// b like 0 <= b < a
-	for (var i = 0; i < b.length; i++) mod = (mod * 10 + b[i] - "0") % a;
-
-	return mod; // return modulo
-}
-
-function LastDigit(a, b) {
-	var len_a = a.length,
-		len_b = b.length;
-
-	// if a and b both are 0
-	if (len_a == 1 && len_b == 1 && b[0] == "0" && a[0] == "0") return 1;
-
-	// if exponent is 0
-	if (len_b == 1 && b[0] == "0") return 1;
-
-	// if base is 0
-	if (len_a == 1 && a[0] == "0") return 0;
-
-	// if exponent is divisible by 4
-	// that means last digit will be
-	// pow(a, 4) % 10. if exponent is
-	//not divisible by 4 that means last
-	// digit will be pow(a, b%4) % 10
-	var exp = Modulo(4, b) == 0 ? 4 : Modulo(4, b);
-
-	// Find last digit in 'a' and
-	// compute its exponent
-	var res = Math.round(Math.pow(a[len_a - 1] - "0", exp));
-
-	// Return last digit of result
-	return res % 10;
-}
-
 function simpleLast(x) {
 	return x % 10;
 }
@@ -132,7 +101,7 @@ function simpleLast(x) {
 // LOG10 (y)
 function getBaseLogTen(y) {
 	const ans = Math.log(y) / Math.log(10);
-	console.log(ans);
+	console.log("base: " + ans);
 	return ans;
 }
 
