@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 router.post("/", function(req, res, next) {
-  console.log(req);
+  console.log(req.body);
   const result = solution(req.body["modules"], req.body["dependencyPairs"]);
   res.send(result);
 });
