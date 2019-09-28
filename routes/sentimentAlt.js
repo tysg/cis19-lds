@@ -1,21 +1,14 @@
 var express = require("express");
 var router = express.Router();
 
-var Sentiment = require("sentiment");
-var sentiment = new Sentiment();
+var { PythonShell } = require("python-shell");
 
 router.post("/", function(req, res, next) {
-    // console.log("hi im here");
+    // console.log(req.body);
+    let py = new PythonShell("./routes/sentiment/main.py");
+    py.send(JSON.stringify(req.body));
 
-    const { reviews } = req.body;
-    const sentimentValues = reviews.map(sentence =>
-        sentiment.analyze(sentence)
-    );
-    const sentiments = sentimentValues.map(fl =>
-        fl.comparative > 0 ? "positive" : "negative"
-    );
-
-    res.send(JSON.stringify({ response: sentiments }));
+    py.on("message", message => res.send(JSON.parse(message)));
 });
 
 module.exports = router;
