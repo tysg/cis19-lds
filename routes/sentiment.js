@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 var Analyzer = require("natural").SentimentAnalyzer;
-var stemmer = require("natural").LancasterStemmer;
+var stemmer = require("natural").PorterStemmer;
 // var tokenizer = require("natural").WordTokenizer;
 var analyzer = new Analyzer("English", stemmer, "senticon");
 
