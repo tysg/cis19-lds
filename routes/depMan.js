@@ -6,22 +6,26 @@ router.post("/", function(req, res, next) {
   const result = solution(req.body["modules"], req.body["dependencyPairs"]);
   res.send(result);
 });
-var graph = [];
-var items = {};
-var visited = [];
-var p = [];
-var result = [];
-var indeg = [];
-
-const sample = {
-  modules: ["m1", "m2"],
-  dependencyPairs: [
-    { dependee: "m2", dependentOn: "m1" },
-    { dependee: "m1", dependentOn: "m2" }
-  ]
-};
+// const sample = {
+//   modules: ["m1", "m2", "m3", "m4", "m5", "m10", "m11", "m12", "m13"],
+//   dependencyPairs: [
+//     { dependee: "m4", dependentOn: "m1" },
+//     { dependee: "m2", dependentOn: "m1" },
+//     { dependee: "m3", dependentOn: "m5" },
+//     { dependee: "m5", dependentOn: "m2" },
+//     { dependee: "m13", dependentOn: "m12" },
+//     { dependee: "m12", dependentOn: "m13" }
+//   ]
+// };
 
 function solution(modules, pairs) {
+  var graph = [];
+  var items = {};
+
+  var p = [];
+  var result = [];
+  var indeg = [];
+
   if (modules.length === 0) {
     return [];
   }
@@ -33,9 +37,6 @@ function solution(modules, pairs) {
 
   indeg = new Array(modules.length);
   indeg.fill(0);
-
-  visited = new Array(modules.length);
-  visited.fill(false);
 
   p = new Array(modules.length);
   p.fill(-1);
@@ -74,16 +75,18 @@ function solution(modules, pairs) {
     result.push(element);
     let arr = graph[element];
     for (let i = 0; i < arr.length; i++) {
-      if (indeg[i] > 0) {
-        indeg[i]--;
-      } else {
-        p[i] = element;
-        q.push(i);
+      if (indeg[arr[i]] > 0) {
+        indeg[arr[i]]--;
+      }
+
+      if (indeg[arr[i]] <= 0) {
+        p[arr[i]] = element;
+        q.push(arr[i]);
       }
     }
   }
 
-  return result.length === 0 ? [] : result.map(i => modules[i]);
+  return result.map(i => modules[i]);
 }
 
 function dfs(ind) {
