@@ -3,7 +3,7 @@ var router = express.Router();
 
 router.get("/", function(req, res, next) {
 	var input = req.body;
-	var output = [50, 50, 50, 50, 50, 50, 50, 50, 50, 50];
+	var output = [51, 50, 50, 50, 50, 50, 50, 50, 50, 50];
 	res.send(output);
 });
 
