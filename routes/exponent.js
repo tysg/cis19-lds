@@ -5,9 +5,27 @@ router.post("/", function(req, res, next) {
 	var input = req.body;
 	const n = input["n"];
 	const p = input["p"];
-	var output = {};
+	var output = solution(n, p);
 
-	var pLogN = p * getBaseLogTen(n);
+	res.send(output);
+});
+
+function solution(n, p) {
+	if (n === 0 && p === 0) {
+		return {
+			result: [null, null, null]
+		};
+	} else if (n === 0) {
+		return {
+			result: [0, 1, 0]
+		};
+	} else if (p === 0) {
+		return {
+			result: [1, 1, 1]
+		};
+	}
+
+	var pLogN = p * Math.log10(n);
 	console.log("pLogN: " + pLogN);
 
 	// FIX HERE
@@ -83,30 +101,14 @@ router.post("/", function(req, res, next) {
 
 	console.log("last: " + last);
 
-	var l = Math.floor(pLogN) + 1;
+	var l = Math.ceil(pLogN);
 
 	console.log("length: " + l);
 
-	output = {
+	return {
 		result: [first, l, last]
 	};
-
-	if (n === 0 && p === 0) {
-		output = {
-			result: [null, null, null]
-		};
-	} else if (n === 0) {
-		output = {
-			result: [0, 1, 0]
-		};
-	} else if (p === 0) {
-		output = {
-			result: [1, 1, 1]
-		};
-	}
-
-	res.send(output);
-});
+}
 
 function simpleLast(x) {
 	return x % 10;
