@@ -15,6 +15,7 @@
     "httpie": "^1.1.2",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
-    "natural": "^0.6.3"
+    "natural": "^0.6.3",
+    "python-shell": "^1.0.8"
   }
 }

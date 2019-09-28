@@ -1,0 +1,9 @@
+{
+  "startingCapital": 400,
+  "stocks": [
+    ["Sony", 30, 400],
+    ["Dell", 20, 300],
+    ["Disney", 15, 100],
+    ["Apple", 20, 100]
+  ]
+}
