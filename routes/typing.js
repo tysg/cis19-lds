@@ -97,7 +97,6 @@ router.post("/", function(req, res, next) {
   const path = traceMst(mst.mst, start);
 
   const result = { path, cost: mst.cost + start.length };
-  console.log(result);
 
   res.send(JSON.stringify(result));
 });
