@@ -14,6 +14,10 @@ var p = [];
 var result = [];
 
 function solution(modules, pairs) {
+  if (modules.length === 0) {
+    return [];
+  }
+
   for (let i = 0; i < modules.length; i++) {
     // keep a item to index
     items[modules[i]] = i;
@@ -30,6 +34,9 @@ function solution(modules, pairs) {
 
   for (let i = 0; i < pairs.length; i++) {
     const on = pairs[i].dependentOn;
+    if (graph[items[on]] === undefined) {
+      return [];
+    }
     graph[items[on]].push(items[pairs[i].dependee]);
   }
 
