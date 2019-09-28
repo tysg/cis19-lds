@@ -10,6 +10,7 @@ var weddingRouter = require("./routes/wedding");
 var chessgameRouter = require("./routes/chessgame.js");
 var lotteryRouter = require("./routes/lottery");
 var sentimentRouter = require("./routes/sentiment");
+var depManRouter = require("./routes/depMan");
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use("/wedding-nightmare", weddingRouter);
 app.use("/chessgame", chessgameRouter);
 app.use("/lottery", lotteryRouter);
 app.use("/sentiment-analysis", sentimentRouter);
+app.use("/generateSequence", depManRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
