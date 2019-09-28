@@ -12,18 +12,69 @@ router.post("/", function(req, res, next) {
 	var a = Math.pow(10, pLogN);
 	var first = firstDigit(a);
 
-	var arrN = n
-		.toString(10)
-		.replace(/\D/g, "0")
-		.split("")
-		.map(Number);
-	var arrP = p
-		.toString(10)
-		.replace(/\D/g, "0")
-		.split("")
-		.map(Number);
+	var last = 0;
 
-	var last = LastDigit(arrN, arrP);
+	var nLast = simpleLast(n);
+	if (nLast === 0 || nLast === 1 || nLast === 5 || nLast === 6) {
+		last = nLast;
+	} else if (nLast === 2 || nLast === 3 || nLast === 7 || nLast === 8) {
+		var cycle = p % 4;
+		if (nLast === 2) {
+			if (cycle === 0) {
+				last = 6;
+			} else if (cycle === 1) {
+				last = 2;
+			} else if (cycle === 2) {
+				last = 4;
+			} else {
+				last = 8;
+			}
+		} else if (nLast === 3) {
+			if (cycle === 0) {
+				last = 1;
+			} else if (cycle === 1) {
+				last = 3;
+			} else if (cycle === 2) {
+				last = 9;
+			} else {
+				last = 7;
+			}
+		} else if (nLast === 7) {
+			if (cycle === 0) {
+				last = 1;
+			} else if (cycle === 1) {
+				last = 7;
+			} else if (cycle === 2) {
+				last = 9;
+			} else {
+				last = 3;
+			}
+		} else if (nLast === 8) {
+			if (cycle === 0) {
+				last = 6;
+			} else if (cycle === 1) {
+				last = 8;
+			} else if (cycle === 2) {
+				last = 4;
+			} else {
+				last = 2;
+			}
+		}
+	} else if (nLast === 4 || nLast === 9) {
+		if (nLast === 4) {
+			if (p % 2 === 0) {
+				last = 6;
+			} else {
+				last = 4;
+			}
+		} else {
+			if (p % 2 === 0) {
+				last = 1;
+			} else {
+				last = 9;
+			}
+		}
+	}
 
 	var l = Math.floor(pLogN) + 1;
 
@@ -72,6 +123,10 @@ function LastDigit(a, b) {
 
 	// Return last digit of result
 	return res % 10;
+}
+
+function simpleLast(x) {
+	return x % 10;
 }
 
 // LOG10 (y)
