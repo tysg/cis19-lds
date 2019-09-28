@@ -17,6 +17,8 @@ function isGood(str, patterns) {
     for (pattern of patterns) {
         if (str.search(pattern) !== -1) {
             return false;
+            // } else if (str.search(pattern.reverse()) !== -1) {
+            //     return false;
         }
     }
 
@@ -24,12 +26,20 @@ function isGood(str, patterns) {
 }
 
 function solution(compLen, str, patterns) {
+    if (isGood(str, patterns)) {
+        return 0;
+    }
+
     result = new Array();
     function helper(str, accum, i) {
         if (i >= str.length) {
             if (isGood(accum, patterns)) {
                 result.push(accum);
             }
+            return;
+        }
+
+        if (!isGood(accum, patterns)) {
             return;
         }
 
