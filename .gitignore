@@ -9,6 +9,7 @@ yarn.lock
 chessgame.in
 sentiments.in
 typing.in
+rd1.in
 
 # ngrok to expose local port
 ngrok
