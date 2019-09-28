@@ -6,7 +6,7 @@ router.post("/", function(req, res, next) {
 	const n = input["n"];
 	const p = input["p"];
 
-	var pLogN = p * Math.log10(n);
+	var pLogN = p * getBaseLogTen(n);
 	console.log("pLogN: " + pLogN);
 
 	// FIX HERE
