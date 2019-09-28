@@ -88,10 +88,10 @@ router.post("/", function(req, res, next) {
 	console.log("length: " + l);
 
 	output = {
-		result: [first, l, last]
+		result = [first, l, last]
 	};
 
-	res.send(JSON.parse(output));
+	res.send(output);
 });
 
 function simpleLast(x) {
