@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 router.post("/", function(req, res, next) {
+  console.log(req);
   const result = solution(req.body["modules"], req.body["dependencyPairs"]);
   res.send(result);
 });
@@ -13,9 +14,6 @@ var p = [];
 var result = [];
 
 function solution(modules, pairs) {
-  console.log(pairs);
-  // return an array
-
   for (let i = 0; i < modules.length; i++) {
     // keep a item to index
     items[modules[i]] = i;
