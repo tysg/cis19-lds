@@ -78,7 +78,7 @@ router.post("/", function(req, res, next) {
   const overflow = N % sum;
 
   const ret = findIndex(overflow, timings, sorted) + 1;
-  // console.log({ answer: ret });
+  console.log({ answer: ret });
   res.send({ answer: ret });
 });
 
