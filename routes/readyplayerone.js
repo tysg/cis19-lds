@@ -24,14 +24,12 @@ router.post("/", function(req, res, next) {
 			lowest = T - N - 1;
 		while (total < T) {
 			let min = Math.min(...ballArr);
-			let lowestMT = lowest - total;
-			let tMT = T - total;
-			if (ballArr.includes(lowestMT)) {
-				let index = ballArr.indexOf(lowestMT);
+			if (ballArr.includes(lowest - total)) {
+				let index = ballArr.indexOf(lowest - total);
 				ballArr.splice(index, 1);
-				total += lowestMT;
-			} else if (ballArr.includes(tMT)) {
-				total += tMT;
+				total += lowest - total;
+			} else if (ballArr.includes(T - total)) {
+				total += T - total;
 			} else {
 				let index = ballArr.indexOf(min);
 				ballArr.splice(index, 1);
