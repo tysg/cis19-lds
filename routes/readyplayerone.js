@@ -14,7 +14,9 @@ router.post("/", function(req, res, next) {
 	}
 
 	var minMoves = -1;
-	if (totalSum < T) {
+	if (N >= T) {
+		minMoves = 1;
+	} else if (totalSum < T) {
 		minMoves = -1;
 	} else {
 		let turn = 0,
@@ -22,22 +24,18 @@ router.post("/", function(req, res, next) {
 			lowest = T - N - 1;
 		while (total < T) {
 			console.log("ARRAY: " + ballArr);
-			let num = Math.min(...ballArr);
-			console.log(num);
+			let min = Math.min(...ballArr);
+			console.log(min);
 			if (ballArr.includes(lowest - total)) {
-				console.log("LOWEST - TOTAL: " + (lowest - total));
 				let index = ballArr.indexOf(lowest - total);
 				ballArr.splice(index, 1);
 				total += lowest - total;
-				console.log("FIRST");
 			} else if (ballArr.includes(T - total)) {
 				total += T - total;
-				console.log("SECOND");
 			} else {
-				let index = ballArr.indexOf(num);
+				let index = ballArr.indexOf(min);
 				ballArr.splice(index, 1);
-				total += num;
-				console.log("THIRD");
+				total += min;
 			}
 
 			turn++;
