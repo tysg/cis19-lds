@@ -27,25 +27,36 @@ function lcm(arr) {
   return (a * b) / gcd(a, b);
 }
 
+const comparator = (a, b) => {
+  const dt = b.time - a.time;
+  return dt === 0 ? b.bid - a.bid : dt;
+};
+
 function findIndex(n, timings, sorted) {
-  let minHeap = new Heap([], Object.equals, (a, b) => b.time - a.time);
+  let minHeap = new Heap([], Object.equals, comparator);
 
   if (n < timings.length) {
-    return timings.indexOf(sorted[n]);
+    return timings.indexOf(n);
   }
+
+  // console.log(n);
 
   timings.forEach((time, i) => {
     minHeap.push({ bid: i, time });
     n--;
   });
 
+  // console.log(n);
   if (n === 0) {
     return minHeap.pop().bid;
   }
 
+  // console.log(n);
   while (n > 0) {
     n--;
     const banker = minHeap.pop();
+
+    // console.log(banker, n);
     if (n === 0) {
       return banker.bid;
     }
@@ -55,19 +66,19 @@ function findIndex(n, timings, sorted) {
 }
 
 router.post("/", function(req, res, next) {
-  console.log(req.body);
+  // console.log(req.body);
 
   const N = req.body.N - 1; // 0 - index
   const timings = req.body.branch_officers_timings;
-  // const factor = lcm(timings);
+  const factor = lcm(timings);
   const sorted = [...timings].sort((a, b) => a - b);
 
-  // const count = timings.map(time => factor / time);
-  // const sum = count.reduce((a, acc) => a + acc, 0);
-  // const overflow = N % sum;
+  const count = timings.map(time => factor / time);
+  const sum = count.reduce((a, acc) => a + acc, 0);
+  const overflow = N % sum;
 
-  const ret = findIndex(N, timings, sorted) + 1;
-  console.log({ answer: ret });
+  const ret = findIndex(overflow, timings, sorted) + 1;
+  // console.log({ answer: ret });
   res.send({ answer: ret });
 });
 
