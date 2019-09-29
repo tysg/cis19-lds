@@ -3,6 +3,7 @@ var router = express.Router();
 
 router.post("/", function(req, res, next) {
     var input = req.body;
+    console.log(input);
     const setId = input["setId"];
     const compLen = input["compositionLength"];
     var comp = input["composition"];
