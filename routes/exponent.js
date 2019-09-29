@@ -26,13 +26,13 @@ router.post("/", function(req, res, next) {
 		pythonOptions: ["-u"],
 		args: [n, p]
 	};
-	last = PythonShell.run("./routes/exponent/expLastDig.py", options, function(
+	PythonShell.run("./routes/exponent/expLastDig.py", options, function(
 		err,
 		results
 	) {
 		if (err) throw err;
-		console.log("results: " + results);
-		return results;
+		console.log("results: " + results[0]);
+		res.send(JSON.parse(results));
 	});
 
 	// var nLast = simpleLast(n);
@@ -100,27 +100,27 @@ router.post("/", function(req, res, next) {
 
 	console.log("last: " + last);
 
-	var output = {};
+	// var output = {};
 
-	if (n === 0 && p === 0) {
-		output = {
-			result: [null, null, null]
-		};
-	} else if (n === 0) {
-		output = {
-			result: [0, 1, 0]
-		};
-	} else if (p === 0) {
-		output = {
-			result: [1, 1, 1]
-		};
-	}
+	// if (n === 0 && p === 0) {
+	// 	output = {
+	// 		result: [null, null, null]
+	// 	};
+	// } else if (n === 0) {
+	// 	output = {
+	// 		result: [0, 1, 0]
+	// 	};
+	// } else if (p === 0) {
+	// 	output = {
+	// 		result: [1, 1, 1]
+	// 	};
+	// }
 
-	output = {
-		result: [first, l, last]
-	};
+	// output = {
+	// 	result: [first, l, last]
+	// };
 
-	res.send(output);
+	// res.send(output);
 });
 
 function simpleLast(x) {
