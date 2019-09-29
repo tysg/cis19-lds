@@ -66,7 +66,7 @@ router.post("/", function(req, res, next) {
 
   const ret = findIndex(overflow, timings, sorted) + 1;
   console.log(ret);
-  res.send(JSON.stringify({ answer: ret }));
+  res.send({ answer: ret });
 });
 
 module.exports = router;

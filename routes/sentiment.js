@@ -20,7 +20,7 @@ router.post("/", function(req, res, next) {
     fl > 0 ? "positive" : "negative"
   );
 
-  res.send(JSON.stringify({ response: sentiments }));
+  res.send({ response: sentiments });
 });
 
 module.exports = router;
