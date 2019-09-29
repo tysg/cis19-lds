@@ -9,9 +9,6 @@ router.post("/", function(req, res, next) {
 		let text = input[j]["text"];
 		let code = [...text.replace(/[^0-9a-z]/gi, "").toUpperCase()];
 
-		if (n === 0) {
-			break;
-		}
 		let ss = new Array(code.length);
 		let i = 0;
 		let startChar = 0;
