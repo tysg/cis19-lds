@@ -13,12 +13,8 @@ router.post("/", function(req, res, next) {
 		totalSum += i + 1;
 	}
 
-	var output = {};
-
 	var minMoves = -1;
-	if (N >= T) {
-		minMoves = 1;
-	} else if (totalSum < T) {
+	if (totalSum < T) {
 		minMoves = -1;
 	} else {
 		let turn = 0,
