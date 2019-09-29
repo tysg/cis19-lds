@@ -2,60 +2,60 @@ var express = require("express");
 var router = express.Router();
 
 router.post("/", function(req, res, next) {
-  // var input = req.body;
-  // var N = input["maxChoosableInteger"];
-  // var T = input["desiredTotal"];
+	var input = req.body;
+	var N = input["maxChoosableInteger"];
+	var T = input["desiredTotal"];
 
-  // var ballArr = new Array(N);
-  // var totalSum = 0;
-  // for (var i = 0; i < N; i++) {
-  // 	ballArr[i] = true;
-  // 	totalSum += i + 1;
-  // }
+	var ballArr = new Array(N);
+	var totalSum = 0;
+	for (var i = 0; i < N; i++) {
+		ballArr[i] = i + 1;
+		totalSum += i + 1;
+	}
 
-  // var output = {};
+	var output = {};
 
-  // var player1 = true;
-  // if (N >= T) {
-  // 	output = {
-  // 		res: 1
-  // 	};
-  // } else if (totalSum < T) {
-  // 	output = {
-  // 		res: -1
-  // 	};
-  // } else if (totalSum === T) {
-  // 	if (N % 2 === 0) {
-  // 		output = {
-  // 			res: -1
-  // 		};
-  // 	} else {
-  // 		output = {
-  // 			res: N
-  // 		};
-  // 	}
-  // } else if (N * 2 >= T) {
-  // 	output = {
-  // 		res: 3
-  // 	};
-  // } else {
-  // }
-  const N = req.body.maxChoosableInteger;
-  const T = req.body.desiredTotal;
+	var minMoves = -1;
+	if (N >= T) {
+		output = {
+			res: 1
+		};
+	} else if (totalSum < T) {
+		output = {
+			res: -1
+		};
+	} else {
+		let turn = 0,
+			total = 0,
+			lowest = T - N - 1;
+		while (total < T) {
+			console.log("ARRAY: " + ballArr);
+			let num = Math.min(...ballArr);
+			console.log(num);
+			if (ballArr.includes(lowest - total)) {
+				console.log("LOWEST - TOTAL: " + (lowest - total));
+				let index = ballArr.indexOf(lowest - total);
+				ballArr.splice(index, 1);
+				total += lowest - total;
+				console.log("FIRST");
+			} else if (ballArr.includes(T - total)) {
+				total += T - total;
+				console.log("SECOND");
+			} else {
+				let index = ballArr.indexOf(num);
+				ballArr.splice(index, 1);
+				total += num;
+				console.log("THIRD");
+			}
 
-  const target = T % N;
-  const ans = target === 0 ? -1 : 1 + 2 * Math.floor(T / N);
+			turn++;
+		}
+		if (turn % 2 === 1) {
+			minMoves = turn;
+		}
+	}
 
-  res.send(JSON.stringify({ res: ans }));
+	res.send(JSON.stringify({ res: minMoves }));
 });
-
-function sol(max, arr, isPlayer1) {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i]) {
-      arr[i] = false;
-      1 + sol(max - (i + 1), arr);
-    }
-  }
-}
 
 module.exports = router;
