@@ -7,20 +7,20 @@ router.post("/", function(req, res, next) {
 	const n = input["n"];
 	const p = input["p"];
 
-	var pLogN = p * Math.log10(n);
-	console.log("pLogN: " + pLogN);
+	// var pLogN = p * Math.log10(n);
+	// console.log("pLogN: " + pLogN);
 
-	// FIX HERE
-	var a = Math.pow(10, pLogN % 1);
-	console.log("a: " + a);
-	var first = Math.floor(a);
-	console.log("first: " + first);
+	// // FIX HERE
+	// var a = Math.pow(10, pLogN % 1);
+	// console.log("a: " + a);
+	// var first = Math.floor(a);
+	// console.log("first: " + first);
 
-	var l = Math.floor(pLogN + 1);
+	// var l = Math.floor(pLogN + 1);
 
-	console.log("length: " + l);
+	// console.log("length: " + l);
 
-	var last = 0;
+	// var last = 0;
 
 	let options = {
 		pythonOptions: ["-u"],
@@ -98,7 +98,7 @@ router.post("/", function(req, res, next) {
 	// 	}
 	// }
 
-	console.log("last: " + last);
+	// console.log("last: " + last);
 
 	// var output = {};
 

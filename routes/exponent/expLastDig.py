@@ -49,4 +49,4 @@ else:
     output.append(firstDigit(n, p))
     output.append(numDigit(n, p))
     output.append(lastDigit(n, p))
-print(json.dumps({"results": output}))
+print(json.dumps({"result": output}))
