@@ -55,6 +55,8 @@ function findIndex(n, timings, sorted) {
 }
 
 router.post("/", function(req, res, next) {
+  console.log(req.body);
+
   const N = req.body.N - 1; // 0 - index
   const timings = req.body.branch_officers_timings;
   const factor = lcm(timings);
@@ -65,7 +67,7 @@ router.post("/", function(req, res, next) {
   const overflow = N % sum;
 
   const ret = findIndex(overflow, timings, sorted) + 1;
-  console.log(ret);
+  console.log({ answer: ret });
   res.send({ answer: ret });
 });
 
