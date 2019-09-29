@@ -17,13 +17,9 @@ router.post("/", function(req, res, next) {
 
 	var minMoves = -1;
 	if (N >= T) {
-		output = {
-			res: 1
-		};
+		minMoves = 1;
 	} else if (totalSum < T) {
-		output = {
-			res: -1
-		};
+		minMoves = -1;
 	} else {
 		let turn = 0,
 			total = 0,
