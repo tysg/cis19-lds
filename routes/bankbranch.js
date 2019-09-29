@@ -59,14 +59,14 @@ router.post("/", function(req, res, next) {
 
   const N = req.body.N - 1; // 0 - index
   const timings = req.body.branch_officers_timings;
-  const factor = lcm(timings);
+  // const factor = lcm(timings);
   const sorted = [...timings].sort((a, b) => a - b);
 
-  const count = timings.map(time => factor / time);
-  const sum = count.reduce((a, acc) => a + acc, 0);
-  const overflow = N % sum;
+  // const count = timings.map(time => factor / time);
+  // const sum = count.reduce((a, acc) => a + acc, 0);
+  // const overflow = N % sum;
 
-  const ret = findIndex(overflow, timings, sorted) + 1;
+  const ret = findIndex(N, timings, sorted) + 1;
   console.log({ answer: ret });
   res.send({ answer: ret });
 });
