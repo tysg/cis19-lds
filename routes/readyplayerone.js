@@ -23,15 +23,15 @@ router.post("/", function(req, res, next) {
 			total = 0,
 			lowest = T - N - 1;
 		while (total < T) {
-			console.log("ARRAY: " + ballArr);
 			let min = Math.min(...ballArr);
-			console.log(min);
-			if (ballArr.includes(lowest - total)) {
-				let index = ballArr.indexOf(lowest - total);
+			let lowestMT = lowest - total;
+			let tMT = T - total;
+			if (ballArr.includes(lowestMT)) {
+				let index = ballArr.indexOf(lowestMT);
 				ballArr.splice(index, 1);
-				total += lowest - total;
-			} else if (ballArr.includes(T - total)) {
-				total += T - total;
+				total += lowestMT;
+			} else if (ballArr.includes(tMT)) {
+				total += tMT;
 			} else {
 				let index = ballArr.indexOf(min);
 				ballArr.splice(index, 1);
