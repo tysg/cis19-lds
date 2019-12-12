@@ -56,7 +56,7 @@ function findIndex(n, timings, sorted) {
     n--;
     const banker = minHeap.pop();
 
-    // console.log(banker, n);
+    console.log(banker, n);
     if (n === 0) {
       return banker.bid;
     }
